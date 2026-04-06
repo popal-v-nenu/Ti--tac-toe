@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ClassLibraryLogic/ClassLibraryLogic.csproj" />
+  <Project Path="Tiс-tac-toe/Tiс-tac-toe.csproj" />
+</Solution>
