@@ -68,26 +68,55 @@ namespace ClassLibraryLogic
             }
             else
             {
-
-                int choice = Single_mod.check_possible_win(is_tic);
-                if (choice != -1) return choice;
-                //проверка паттерна с диагональю только за ноликов
+                int choice;
+                //проверка за ноликов
                 if (!is_tic)
                 {
+                    //возможный выйгрышь или защита за ноликов
+                    choice = Single_mod.check_possible_win(!is_tic);
+                    if (choice != -1) return choice;
+
                     //проверка на выйгрышь
                     choice = Single_mod.check_pattern_minus();
-                    //проверка на проигрышь
                     if (choice != -1) return choice;
-                    choice = Single_mod.check_pattern_miniDiagonal();
-                    if (choice != -1) return choice;
-                    choice = Single_mod.check_pattern_diagonal_XOX();
-                    if (choice != -1) return choice;
-                    choice = Single_mod.check_pattern_diagonal_XXO();
-                    if (choice != -1) return choice;
+
+                    if (count_move == 2)
+                    {
+                        choice = Single_mod.check_pattern_miniDiagonal();
+                        if (choice != -1) return choice;
+
+                        choice = Single_mod.pattern_even_odd(is_tic);
+                        if (choice != -1) return choice;
+
+                        choice = Single_mod.check_pattern_diagonal_XOX();
+                        if (choice != -1) return choice;
+
+                        choice = Single_mod.check_pattern_diagonal_XXO();
+                        if (choice != -1) return choice;
+                    }
+                    if (Single_mod.exists_odd())
+                    {
+                        while (Single_mod.check_x_o(randomI, randomJ) != -1 || (randomI + randomJ) % 2 != 0)
+                        {
+                            randomI = random.Next(0, 3);
+                            randomJ = random.Next(0, 3);
+                        }
+                    }
+                    while (Single_mod.check_x_o(randomI, randomJ) != -1)
+                    {
+                        randomI = random.Next(0, 3);
+                        randomJ = random.Next(0, 3);
+                    }
+
+
                 }
                 else
                 {
                     //проверка для крестиков
+                    //возможный выйгрышь за крестиков
+                    choice = Single_mod.check_possible_win(is_tic);
+                    if (choice != -1) return choice;
+
                     //проверка на свободный центр
                     if (Single_mod.check_x_o(1, 1) == -1) return 4;
                     if (count_move == 2)

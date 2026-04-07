@@ -325,7 +325,7 @@ namespace Tiс_tac_toe
             tableLayoutPanelChoiseXO.Visible = true;
             //меняем цвет надписи выбора стороны и кнопки посмотреть поле
             labelXO.ForeColor = Color.Green;
-            buttonViewField.ForeColor = Color.Green;
+            //buttonViewField.ForeColor = Color.Green;
             //выключаем кнопки с выбором режима игры
             buttonSoloGame.Enabled = false;
             buttonEasyBot.Enabled = false;
@@ -360,7 +360,7 @@ namespace Tiс_tac_toe
             tableLayoutPanelChoiseXO.Visible = true;
             //меняем цвет надписи выбора стороны и кнопки посмотреть поле
             labelXO.ForeColor = Color.Yellow;
-            buttonViewField.ForeColor = Color.Yellow;
+            //buttonViewField.ForeColor = Color.Yellow;
             //выключаем кнопки с выбором режима игры
             buttonSoloGame.Enabled = false;
             buttonEasyBot.Enabled = false;
@@ -379,7 +379,7 @@ namespace Tiс_tac_toe
             tableLayoutPanelChoiseXO.Visible = true;
             //меняем цвет надписи выбора стороны и кнопки посмотреть поле
             labelXO.ForeColor = Color.Red;
-            buttonViewField.ForeColor = Color.Red;
+            //buttonViewField.ForeColor = Color.Red;
             //выключаем кнопки с выбором режима игры
             buttonSoloGame.Enabled = false;
             buttonEasyBot.Enabled = false;
@@ -528,6 +528,22 @@ namespace Tiс_tac_toe
 
         private void TicTacToe_Resize(object sender, EventArgs e)
         {
+            int bordersize = (Math.Min(this.Size.Width, this.Size.Height) - 250) / 50;
+            buttonSoloGame.FlatAppearance.BorderSize = bordersize;
+            buttonEasyBot.FlatAppearance.BorderSize = bordersize;
+            buttonMediumBot.FlatAppearance.BorderSize= bordersize;
+            buttonImpossibleBot.FlatAppearance.BorderSize = bordersize;
+            button1.FlatAppearance.BorderSize = bordersize;
+            button2.FlatAppearance.BorderSize = bordersize;
+            button3.FlatAppearance.BorderSize = bordersize;
+            button4.FlatAppearance.BorderSize = bordersize;
+            button5.FlatAppearance.BorderSize = bordersize;
+            button6.FlatAppearance.BorderSize = bordersize;
+            button7.FlatAppearance.BorderSize = bordersize;
+            button8.FlatAppearance.BorderSize = bordersize;
+            button9.FlatAppearance.BorderSize = bordersize;
+
+
             //this.Size = new Size(557, 525);
             //float buttons_divide_w = ((float)557 / 72);
             //float buttons_divide_h = ((float)525 / 72);
