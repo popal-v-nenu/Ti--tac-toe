@@ -19,12 +19,12 @@ namespace ClassLibraryLogic
 
 
 
-            while (Single_mod.check_x_o(randomI, randomJ) != -1)
+            while (Field.check_x_o(randomI, randomJ) != -1)
             {
                 randomI = random.Next(0, 3);
                 randomJ = random.Next(0, 3);
             }
-            Single_mod.put_x_o(randomI, randomJ, is_tic);
+            Field.put_x_o(randomI, randomJ, is_tic);
             count_move++;
             return randomI * 3 + randomJ;
         }
@@ -33,16 +33,18 @@ namespace ClassLibraryLogic
             Random random = new Random();
             int randomI = random.Next(0, 3);
             int randomJ = random.Next(0, 3);
+
+            Field field = new Field();
             
-            int choice = Single_mod.check_possible_win(is_tic);
+            int choice = field.check_possible_win(is_tic, Field.field);
             if (choice != -1) return choice;
-            while (Single_mod.check_x_o(randomI, randomJ) != -1)
+            while (Field.check_x_o(randomI, randomJ) != -1)
             {
                 randomI = random.Next(0, 3);
                 randomJ = random.Next(0, 3);
             }   
             
-            Single_mod.put_x_o(randomI, randomJ, is_tic);
+            Field.put_x_o(randomI, randomJ, is_tic);
             count_move++;
             return randomI * 3 + randomJ;
         }
@@ -51,16 +53,18 @@ namespace ClassLibraryLogic
             Random random = new Random();
             int randomI = random.Next(0, 3);
             int randomJ = random.Next(0, 3);
+
+            Field field = new Field();
+
             count_move++;
             if (count_move == 1)
             {
                 //return 4;
 
                 //проверка для ноликов
-                if (Single_mod.check_x_o(1, 1) == -1 && !is_tic) return 4;
-                //проверка на четную клектку для крестиков
-                
-                while (Single_mod.check_x_o(randomI, randomJ) != -1 || (randomI + randomJ) % 2 != 0)
+                if (Field.check_x_o(1, 1) == -1 && !is_tic)  return 4;
+                //проверка на четную клектку                
+                while (Field.check_x_o(randomI, randomJ) != -1 || (randomI + randomJ) % 2 != 0)
                 {
                     randomI = random.Next(0, 3);
                     randomJ = random.Next(0, 3);
@@ -73,36 +77,36 @@ namespace ClassLibraryLogic
                 if (!is_tic)
                 {
                     //возможный выйгрышь или защита за ноликов
-                    choice = Single_mod.check_possible_win(!is_tic);
+                    choice = field.check_possible_win(!is_tic, Field.field);
                     if (choice != -1) return choice;
 
                     //проверка на выйгрышь
-                    choice = Single_mod.check_pattern_minus();
+                    choice = Field.check_pattern_minus();
                     if (choice != -1) return choice;
 
                     if (count_move == 2)
                     {
-                        choice = Single_mod.check_pattern_miniDiagonal();
+                        choice = Field.check_pattern_miniDiagonal();
                         if (choice != -1) return choice;
 
-                        choice = Single_mod.pattern_even_odd(is_tic);
+                        choice = Field.pattern_even_odd(is_tic);
                         if (choice != -1) return choice;
 
-                        choice = Single_mod.check_pattern_diagonal_XOX();
+                        choice = field.check_pattern_diagonal_XOX(Field.field);
                         if (choice != -1) return choice;
 
-                        choice = Single_mod.check_pattern_diagonal_XXO();
+                        choice = field.check_pattern_diagonal_XXO(Field.field);
                         if (choice != -1) return choice;
                     }
-                    if (Single_mod.exists_odd())
+                    if (Field.exists_odd())
                     {
-                        while (Single_mod.check_x_o(randomI, randomJ) != -1 || (randomI + randomJ) % 2 != 0)
+                        while (Field.check_x_o(randomI, randomJ) != -1 || (randomI + randomJ) % 2 != 0)
                         {
                             randomI = random.Next(0, 3);
                             randomJ = random.Next(0, 3);
                         }
                     }
-                    while (Single_mod.check_x_o(randomI, randomJ) != -1)
+                    while (Field.check_x_o(randomI, randomJ) != -1)
                     {
                         randomI = random.Next(0, 3);
                         randomJ = random.Next(0, 3);
@@ -114,44 +118,67 @@ namespace ClassLibraryLogic
                 {
                     //проверка для крестиков
                     //возможный выйгрышь за крестиков
-                    choice = Single_mod.check_possible_win(is_tic);
+                    choice = field.check_possible_win(is_tic, Field.field);
                     if (choice != -1) return choice;
 
-                    //проверка на свободный центр
-                    if (Single_mod.check_x_o(1, 1) == -1) return 4;
+                    
                     if (count_move == 2)
                     {
-                        choice = Single_mod.check_pick_even();
+                        //проверка x_o
+                        choice = Field.check_line();
+                        if (choice != -1) return choice;
+
+                        //проверка противоположных углов
+                        choice = Field.opposites();
+                        if (choice != -1) return choice;
+
+                        //проверка на свободный центр
+                        if (Field.check_x_o(1, 1) == -1) return 4;
+
+                        choice = Field.check_pick_even();
                         if (choice != -1) return choice;
                     }
                     else if (count_move == 3)
                     {
-                        choice = Single_mod.check_pick_even();
+                        //проверка opposites
+                        int opposites = Field.opposites();
+                        if (opposites != -1 && Field.check_x_o(1, 1) == -1)
+                        {
+                            
+                            int rnd = random.Next(0, 2);
+                            int num = opposites / 3 == opposites % 3 ? 0 : 1;
+                            int ret = (rnd * 6 + (rnd - num) * 2);
+                            if (Field.check_x_o(ret / 3, ret % 3) == -1) return ret;
+                            else return ((1 - rnd) * 6) + (1 - rnd - num) * 2;
+                        }
+                        
+
+                        choice = Field.check_pick_even();
                         switch (choice)
                         {
                             case 0:
-                                while (Single_mod.check_x_o(randomI, randomJ) != -1 || randomI == 0 && randomJ == 0 || (randomI + randomJ) % 2 != 0)
+                                while (Field.check_x_o(randomI, randomJ) != -1 || randomI == 0 && randomJ == 0 || (randomI + randomJ) % 2 != 0)
                                 {
                                     randomI = random.Next(0, 3);
                                     randomJ = random.Next(0, 3);
                                 }
                                 return randomI * 3 + randomJ;
                             case 2:
-                                while (Single_mod.check_x_o(randomI, randomJ) != -1 || randomI == 0 && randomJ == 2 || (randomI + randomJ) % 2 != 0)
+                                while (Field.check_x_o(randomI, randomJ) != -1 || randomI == 0 && randomJ == 2 || (randomI + randomJ) % 2 != 0)
                                 {
                                     randomI = random.Next(0, 3);
                                     randomJ = random.Next(0, 3);
                                 }
                                 return randomI * 3 + randomJ;
                             case 6:
-                                while (Single_mod.check_x_o(randomI, randomJ) != -1 || randomI == 2 && randomJ == 0 || (randomI + randomJ) % 2 != 0)
+                                while (Field.check_x_o(randomI, randomJ) != -1 || randomI == 2 && randomJ == 0 || (randomI + randomJ) % 2 != 0)
                                 {
                                     randomI = random.Next(0, 3);
                                     randomJ = random.Next(0, 3);
                                 }
                                 return randomI * 3 + randomJ;
                             case 8:
-                                while (Single_mod.check_x_o(randomI, randomJ) != -1 || randomI == 2 && randomJ == 2 || (randomI + randomJ) % 2 != 0)
+                                while (Field.check_x_o(randomI, randomJ) != -1 || randomI == 2 && randomJ == 2 || (randomI + randomJ) % 2 != 0)
                                 {
                                     randomI = random.Next(0, 3);
                                     randomJ = random.Next(0, 3);
@@ -165,7 +192,7 @@ namespace ClassLibraryLogic
                 
                 if (count_move >= 4)
                 {
-                    while (Single_mod.check_x_o(randomI, randomJ) != -1)
+                    while (Field.check_x_o(randomI, randomJ) != -1)
                     {
                         randomI = random.Next(0, 3);
                         randomJ = random.Next(0, 3);
@@ -173,7 +200,7 @@ namespace ClassLibraryLogic
                 }
                 else
                 {
-                    while (Single_mod.check_x_o(randomI, randomJ) != -1 || (randomI + randomJ) % 2 != 0)
+                    while (Field.check_x_o(randomI, randomJ) != -1 || (randomI + randomJ) % 2 != 0)
                     {
                         randomI = random.Next(0, 3);
                         randomJ = random.Next(0, 3);
@@ -183,7 +210,7 @@ namespace ClassLibraryLogic
             }
             
 
-            Single_mod.put_x_o(randomI, randomJ, is_tic);
+            Field.put_x_o(randomI, randomJ, is_tic);
             
             return randomI * 3 + randomJ;
         }

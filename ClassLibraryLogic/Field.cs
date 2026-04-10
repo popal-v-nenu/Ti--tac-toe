@@ -2,7 +2,7 @@
 
 namespace ClassLibraryLogic
 {
-    public class Single_mod
+    public class Field
     {
         public static int[,] field = new int[3, 3]
         {
@@ -14,7 +14,23 @@ namespace ClassLibraryLogic
         public static void put_x_o(int x, int y, bool is_tic) { field[x, y] = is_tic ? 1 : 0; }
         public static int check_x_o(int x, int y) { return field[x, y]; }
         public static void clear_field() { for (int i = 0; i < 3; i++) for (int j = 0; j < 3; j++) field[i, j] = -1; }
-        public static int check_field()
+        //public static int check_field()
+        //{
+        //    bool is_draw = true;
+        //    for (int i = 0; i < 3; i++)
+        //    {
+        //        if (field[i, 0] != -1 && field[i, 0] == field[i, 1] && field[i, 1] == field[i, 2]) return field[i, 0];
+        //        if (field[0, i] != -1 && field[0, i] == field[1, i] && field[1, i] == field[2, i]) return field[0, i];
+        //        for (int j = 0; j < 3; j++) if (field[i, j] == -1) is_draw = false;
+        //    }
+        //    if (field[0, 0] != -1 && field[0, 0] == field[1, 1] && field[1, 1] == field[2, 2]) return field[0, 0];
+        //    if (field[0, 2] != -1 && field[0, 2] == field[1, 1] && field[1, 1] == field[2, 0]) return field[0, 2];
+
+        //    return is_draw ? 2 : -1;
+        //}
+
+
+        public int check_field(int[,] field)
         {
             bool is_draw = true;
             for (int i = 0; i < 3; i++)
@@ -28,9 +44,10 @@ namespace ClassLibraryLogic
 
             return is_draw ? 2 : -1;
         }
-        public static int check_possible_win(bool is_tic)
+
+        public int check_possible_win(bool tic, int[,] field)
         {
-            int num = is_tic ? 1 : 0;
+            int num = tic ? 1 : 0;
             //проверка чтобы выйграть
             for (int i = 0; i < 3; i++)
             {
@@ -55,7 +72,7 @@ namespace ClassLibraryLogic
             //return -1;
             //если не один return не сработал то проверка на то чтобы не проиграть
             //меняем значение num на противоположный
-            num = is_tic ? 0 : 1;
+            num = tic ? 0 : 1;
 
             for (int i = 0; i < 3; i++)
             {
@@ -79,7 +96,7 @@ namespace ClassLibraryLogic
 
             return -1;
         }
-        public static int check_pattern_diagonal_XOX()
+        public int check_pattern_diagonal_XOX(int[,] field)
         {
             if (field[1, 1] == 0 && (field[0, 0] == 1 && field[2, 2] == 1 || field[0, 2] == 1 && field[2, 0] == 1))
             {
@@ -95,7 +112,7 @@ namespace ClassLibraryLogic
             }
             return -1;
         }
-        public static int check_pattern_diagonal_XXO()
+        public int check_pattern_diagonal_XXO(int[,] field)
         {
             for (int i = 0; i < 3; i++)
             {
@@ -169,19 +186,19 @@ namespace ClassLibraryLogic
             }
             return -1;
         }
-        public static int exists_even(bool is_tic)
+        public static int exists_even(bool tic)
         {
-            int num = is_tic ? 1 : 0;
+            int num = tic ? 1 : 0;
             for (int i = 0; i < 3; ++i) for (int j = 0; j < 3; ++j) if (field[i, j] == num && (i + j) % 2 != 0) return i * 3 + j;
             return -1;
         }
-        public static int exists_odd(bool is_tic)
+        public static int exists_odd(bool tic)
         {
-            int num = is_tic ? 1 : 0;
+            int num = tic ? 1 : 0;
             for (int i = 0; i < 3; ++i) for (int j = 0; j < 3; ++j) if (field[i, j] == num && (i + j) % 2 == 0) return i * 3 + j;
             return -1;
         }
-        public static int pattern_even_odd(bool is_tic)
+        public static int pattern_even_odd(bool tic)
         {
             //обработка
             /* 
@@ -189,8 +206,8 @@ namespace ClassLibraryLogic
              _ 0 _
              x _ _ 
             */
-            int even = Single_mod.exists_even(!is_tic);
-            int odd = Single_mod.exists_odd(!is_tic);
+            int even = Field.exists_even(!tic);
+            int odd = Field.exists_odd(!tic);
             if (even != -1 && odd != -1)
             {
                 int evenRow = even / 3, evenCol = even % 3;
@@ -214,7 +231,7 @@ namespace ClassLibraryLogic
                     Random random = new Random();
                     int randomI = random.Next(0, 2);
                     int randomJ = random.Next(0, 2);
-                    while (Single_mod.check_x_o(randomI, randomJ) != -1 || randomI * 3 + randomJ == exceptionOne || randomI * 3 + randomJ == exceptionTwo)
+                    while (Field.check_x_o(randomI, randomJ) != -1 || randomI * 3 + randomJ == exceptionOne || randomI * 3 + randomJ == exceptionTwo)
                     {
                         randomI = random.Next(0, 3);
                         randomJ = random.Next(0, 3);
@@ -230,6 +247,29 @@ namespace ClassLibraryLogic
         {
             for (int i = 0; i < 3; i++) for (int j = 0; j < 3; j++) if ((i + j) % 2 == 0 && field[i, j] == -1) return true;
             return false;
+        }
+
+        public static int check_line()
+        {
+            if (field[0, 0] == 1 && (field[0, 2] == 0 || field[2, 0] == 0)) return 8;
+            if (field[0, 2] == 1 && (field[0, 0] == 0 || field[2, 2] == 0)) return 6;
+            if (field[2, 0] == 1 && (field[0, 0] == 0 || field[2, 2] == 0)) return 2;
+            if (field[2, 2] == 1 && (field[0, 2] == 0 || field[2, 0] == 0)) return 0;
+            return -1;
+        }
+        public static int opposites()
+        {
+            if (field[0, 0] == 0 && field[2, 2] == 1 || field[0, 0] == 1 && field[2, 2] == 0)
+            {
+                Random random = new Random();
+                return random.Next(0, 2) * 4 + 2; //выбор 2 или 6
+            }
+            if (field[0, 2] == 0 && field[2, 0] == 1 || field[0, 2] == 1 && field[2, 0] == 0)
+            {
+                Random random = new Random();
+                return random.Next(0, 2) * 8; //выбор 0 или 8
+            }
+            return -1;
         }
     }
 

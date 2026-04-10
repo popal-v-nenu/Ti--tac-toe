@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using ClassLibraryLogic;
 
 namespace Tiс_tac_toe
 {
@@ -82,7 +83,7 @@ namespace Tiс_tac_toe
             //меняем цвет в зависимости от хода
             button1.ForeColor = is_tic ? Color.Red : Color.Blue;
             //вставляем в массив ход
-            ClassLibraryLogic.Single_mod.put_x_o(0, 0, is_tic);
+            ClassLibraryLogic.Field.put_x_o(0, 0, is_tic);
             //меняем ход
             is_tic = !is_tic;
             //вывод чей сейчас ход
@@ -107,7 +108,7 @@ namespace Tiс_tac_toe
             enable_buttons[1] = false;
             button2.Text = is_tic ? "X" : "O";
             button2.ForeColor = is_tic ? Color.Red : Color.Blue;
-            ClassLibraryLogic.Single_mod.put_x_o(0, 1, is_tic);
+            ClassLibraryLogic.Field.put_x_o(0, 1, is_tic);
             is_tic = !is_tic;
             this.Text = is_tic ? "Ход крестиков" : "Ход ноликов";
             if (check_WLD()) return;
@@ -125,7 +126,7 @@ namespace Tiс_tac_toe
             enable_buttons[2] = false;
             button3.Text = is_tic ? "X" : "O";
             button3.ForeColor = is_tic ? Color.Red : Color.Blue;
-            ClassLibraryLogic.Single_mod.put_x_o(0, 2, is_tic);
+            ClassLibraryLogic.Field.put_x_o(0, 2, is_tic);
             is_tic = !is_tic;
             this.Text = is_tic ? "Ход крестиков" : "Ход ноликов";
             if (check_WLD()) return;
@@ -143,7 +144,7 @@ namespace Tiс_tac_toe
             enable_buttons[3] = false;
             button4.Text = is_tic ? "X" : "O";
             button4.ForeColor = is_tic ? Color.Red : Color.Blue;
-            ClassLibraryLogic.Single_mod.put_x_o(1, 0, is_tic);
+            ClassLibraryLogic.Field.put_x_o(1, 0, is_tic);
             is_tic = !is_tic;
             this.Text = is_tic ? "Ход крестиков" : "Ход ноликов";
             if (check_WLD()) return;
@@ -161,7 +162,7 @@ namespace Tiс_tac_toe
             enable_buttons[4] = false;
             button5.Text = is_tic ? "X" : "O";
             button5.ForeColor = is_tic ? Color.Red : Color.Blue;
-            ClassLibraryLogic.Single_mod.put_x_o(1, 1, is_tic);
+            ClassLibraryLogic.Field.put_x_o(1, 1, is_tic);
             is_tic = !is_tic;
             this.Text = is_tic ? "Ход крестиков" : "Ход ноликов";
             if (check_WLD()) return;
@@ -179,7 +180,7 @@ namespace Tiс_tac_toe
             enable_buttons[5] = false;
             button6.Text = is_tic ? "X" : "O";
             button6.ForeColor = is_tic ? Color.Red : Color.Blue;
-            ClassLibraryLogic.Single_mod.put_x_o(1, 2, is_tic);
+            ClassLibraryLogic.Field.put_x_o(1, 2, is_tic);
             is_tic = !is_tic;
             this.Text = is_tic ? "Ход крестиков" : "Ход ноликов";
             if (check_WLD()) return;
@@ -197,7 +198,7 @@ namespace Tiс_tac_toe
             enable_buttons[6] = false;
             button7.Text = is_tic ? "X" : "O";
             button7.ForeColor = is_tic ? Color.Red : Color.Blue;
-            ClassLibraryLogic.Single_mod.put_x_o(2, 0, is_tic);
+            ClassLibraryLogic.Field.put_x_o(2, 0, is_tic);
             is_tic = !is_tic;
             this.Text = is_tic ? "Ход крестиков" : "Ход ноликов";
             if (check_WLD()) return;
@@ -215,7 +216,7 @@ namespace Tiс_tac_toe
             enable_buttons[7] = false;
             button8.Text = is_tic ? "X" : "O";
             button8.ForeColor = is_tic ? Color.Red : Color.Blue;
-            ClassLibraryLogic.Single_mod.put_x_o(2, 1, is_tic);
+            ClassLibraryLogic.Field.put_x_o(2, 1, is_tic);
             is_tic = !is_tic;
             this.Text = is_tic ? "Ход крестиков" : "Ход ноликов";
             if (check_WLD()) return;
@@ -233,7 +234,7 @@ namespace Tiс_tac_toe
             enable_buttons[8] = false;
             button9.Text = is_tic ? "X" : "O";
             button9.ForeColor = is_tic ? Color.Red : Color.Blue;
-            ClassLibraryLogic.Single_mod.put_x_o(2, 2, is_tic);
+            ClassLibraryLogic.Field.put_x_o(2, 2, is_tic);
             is_tic = !is_tic;
             this.Text = is_tic ? "Ход крестиков" : "Ход ноликов";
             if (check_WLD()) return;
@@ -249,7 +250,7 @@ namespace Tiс_tac_toe
             tableLayoutPanelButtons.Visible = false;
             tableLayoutPanelMenu.Visible = true;
             //очищаем поле
-            ClassLibraryLogic.Single_mod.clear_field();
+            ClassLibraryLogic.Field.clear_field();
             //восстанавливаем ход крестиков
             is_tic = true;
             //включаем кнопки с выбором режима игры
@@ -281,7 +282,9 @@ namespace Tiс_tac_toe
         public void empty_text_buttons() { foreach (Button button in buttons) button.Text = ""; }
         public bool check_WLD()
         {
-            int WLD = ClassLibraryLogic.Single_mod.check_field();
+            Field field = new Field();
+            int WLD = field.check_field(Field.field);
+            
             if (WLD != -1)
             {
                 switch (WLD)
@@ -424,6 +427,9 @@ namespace Tiс_tac_toe
 
         private void buttonBlackTheme_Click(object sender, EventArgs e)
         {
+            //buttonEasyBot.FlatAppearance.MouseOverBackColor = Color.Gray;
+            //buttonEasyBot.FlatAppearance.MouseDownBackColor = Color.White;
+
             theme = 1;
             this.BackColor = Color.Black;
             //buttonBlackTheme.BackColor = Color.Black;
@@ -476,6 +482,8 @@ namespace Tiс_tac_toe
 
         private void buttonWhiteTheme_Click(object sender, EventArgs e)
         {
+            //buttonEasyBot.FlatAppearance.MouseOverBackColor = Color.Black;
+
             theme = 0;
             this.BackColor = Color.White;
             //buttonBlackTheme.BackColor = Color.White;
@@ -533,6 +541,10 @@ namespace Tiс_tac_toe
             buttonEasyBot.FlatAppearance.BorderSize = bordersize;
             buttonMediumBot.FlatAppearance.BorderSize= bordersize;
             buttonImpossibleBot.FlatAppearance.BorderSize = bordersize;
+
+            buttonWhiteTheme.FlatAppearance.BorderSize = bordersize; 
+            buttonBlackTheme.FlatAppearance.BorderSize = bordersize;
+
             button1.FlatAppearance.BorderSize = bordersize;
             button2.FlatAppearance.BorderSize = bordersize;
             button3.FlatAppearance.BorderSize = bordersize;
@@ -543,6 +555,12 @@ namespace Tiс_tac_toe
             button8.FlatAppearance.BorderSize = bordersize;
             button9.FlatAppearance.BorderSize = bordersize;
 
+            buttonX.FlatAppearance.BorderSize = bordersize;
+            buttonO.FlatAppearance.BorderSize = bordersize;
+
+            buttonContinue.FlatAppearance.BorderSize = bordersize;
+            buttonViewField.FlatAppearance.BorderSize = bordersize;
+            buttonExit.FlatAppearance.BorderSize = bordersize;
 
             //this.Size = new Size(557, 525);
             //float buttons_divide_w = ((float)557 / 72);

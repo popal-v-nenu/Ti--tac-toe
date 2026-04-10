@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="ClassLibraryLogic/ClassLibraryLogic.csproj" />
+  <Project Path="TestProjectTic-tac-toe/TestProjectTic-tac-toe.csproj" Id="9fdc8fba-0ccf-4792-b717-612bdc6a3cff" />
   <Project Path="Tiс-tac-toe/Tiс-tac-toe.csproj" />
 </Solution>
