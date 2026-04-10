@@ -254,12 +254,12 @@ namespace Tiс_tac_toe
             //восстанавливаем ход крестиков
             is_tic = true;
             //включаем кнопки с выбором режима игры
-            buttonSoloGame.Enabled = true;
+            buttonTwoGame.Enabled = true;
             buttonEasyBot.Enabled = true;
             buttonMediumBot.Enabled = true;
             buttonImpossibleBot.Enabled = true;
             //сбрасываем счетчик ходов
-            ClassLibraryLogic.Bots_mod.reset_count_move();
+            Bots_mod.reset_count_move();
             //тему
             if (theme == 0) buttonWhiteTheme_Click(sender, e);
             if (theme == 1) buttonBlackTheme_Click(sender, e);
@@ -330,7 +330,7 @@ namespace Tiс_tac_toe
             labelXO.ForeColor = Color.Green;
             //buttonViewField.ForeColor = Color.Green;
             //выключаем кнопки с выбором режима игры
-            buttonSoloGame.Enabled = false;
+            buttonTwoGame.Enabled = false;
             buttonEasyBot.Enabled = false;
             buttonMediumBot.Enabled = false;
             buttonImpossibleBot.Enabled = false;
@@ -365,7 +365,7 @@ namespace Tiс_tac_toe
             labelXO.ForeColor = Color.Yellow;
             //buttonViewField.ForeColor = Color.Yellow;
             //выключаем кнопки с выбором режима игры
-            buttonSoloGame.Enabled = false;
+            buttonTwoGame.Enabled = false;
             buttonEasyBot.Enabled = false;
             buttonMediumBot.Enabled = false;
             buttonImpossibleBot.Enabled = false;
@@ -384,7 +384,7 @@ namespace Tiс_tac_toe
             labelXO.ForeColor = Color.Red;
             //buttonViewField.ForeColor = Color.Red;
             //выключаем кнопки с выбором режима игры
-            buttonSoloGame.Enabled = false;
+            buttonTwoGame.Enabled = false;
             buttonEasyBot.Enabled = false;
             buttonMediumBot.Enabled = false;
             buttonImpossibleBot.Enabled = false;
@@ -452,7 +452,7 @@ namespace Tiс_tac_toe
             button8.ForeColor = Color.White;
             button9.BackColor = Color.Black;
             button9.ForeColor = Color.White;
-            buttonSoloGame.BackColor = Color.Black;
+            buttonTwoGame.BackColor = Color.Black;
             //buttonSoloGame.ForeColor = Color.White;
             buttonEasyBot.BackColor = Color.Black;
             //buttonEasyBot.ForeColor = Color.White;
@@ -506,7 +506,7 @@ namespace Tiс_tac_toe
             button8.ForeColor = Color.Black;
             button9.BackColor = Color.White;
             button9.ForeColor = Color.Black;
-            buttonSoloGame.BackColor = Color.White;
+            buttonTwoGame.BackColor = Color.White;
             //buttonSoloGame.ForeColor = Color.Black;
             buttonEasyBot.BackColor = Color.White;
             //buttonEasyBot.ForeColor = Color.Black;
@@ -537,7 +537,7 @@ namespace Tiс_tac_toe
         private void TicTacToe_Resize(object sender, EventArgs e)
         {
             int bordersize = (Math.Min(this.Size.Width, this.Size.Height) - 250) / 50;
-            buttonSoloGame.FlatAppearance.BorderSize = bordersize;
+            buttonTwoGame.FlatAppearance.BorderSize = bordersize;
             buttonEasyBot.FlatAppearance.BorderSize = bordersize;
             buttonMediumBot.FlatAppearance.BorderSize= bordersize;
             buttonImpossibleBot.FlatAppearance.BorderSize = bordersize;
@@ -589,7 +589,7 @@ namespace Tiс_tac_toe
             buttonWhiteTheme.Font = font_theme_buttons;
             buttonBlackTheme.Font = font_theme_buttons;
 
-            buttonSoloGame.Font = font_game_mode;
+            buttonTwoGame.Font = font_game_mode;
             buttonEasyBot.Font = font_game_mode;
             buttonMediumBot.Font = font_game_mode;
             buttonImpossibleBot.Font = font_game_mode;

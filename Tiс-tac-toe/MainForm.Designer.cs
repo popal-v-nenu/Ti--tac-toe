@@ -43,7 +43,7 @@
             buttonImpossibleBot = new Button();
             buttonMediumBot = new Button();
             buttonEasyBot = new Button();
-            buttonSoloGame = new Button();
+            buttonTwoGame = new Button();
             tableLayoutPanelLabelTheme = new TableLayoutPanel();
             labelChoiceGameMode = new Label();
             tableLayoutPanelThems = new TableLayoutPanel();
@@ -235,7 +235,7 @@
             tableLayoutPanelMods.Controls.Add(buttonImpossibleBot, 1, 1);
             tableLayoutPanelMods.Controls.Add(buttonMediumBot, 0, 1);
             tableLayoutPanelMods.Controls.Add(buttonEasyBot, 1, 0);
-            tableLayoutPanelMods.Controls.Add(buttonSoloGame, 0, 0);
+            tableLayoutPanelMods.Controls.Add(buttonTwoGame, 0, 0);
             tableLayoutPanelMods.Location = new Point(3, 199);
             tableLayoutPanelMods.Name = "tableLayoutPanelMods";
             tableLayoutPanelMods.RowCount = 2;
@@ -254,7 +254,7 @@
             buttonImpossibleBot.Name = "buttonImpossibleBot";
             buttonImpossibleBot.Size = new Size(243, 90);
             buttonImpossibleBot.TabIndex = 7;
-            buttonImpossibleBot.Text = "Сложный бот";
+            buttonImpossibleBot.Text = "Невозможный бот бот";
             buttonImpossibleBot.UseVisualStyleBackColor = true;
             buttonImpossibleBot.Click += buttonImpossibleBot_Click;
             // 
@@ -286,19 +286,19 @@
             buttonEasyBot.UseVisualStyleBackColor = true;
             buttonEasyBot.Click += buttonEasyBot_Click;
             // 
-            // buttonSoloGame
+            // buttonTwoGame
             // 
-            buttonSoloGame.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            buttonSoloGame.FlatStyle = FlatStyle.Flat;
-            buttonSoloGame.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold);
-            buttonSoloGame.ForeColor = Color.Blue;
-            buttonSoloGame.Location = new Point(3, 3);
-            buttonSoloGame.Name = "buttonSoloGame";
-            buttonSoloGame.Size = new Size(243, 89);
-            buttonSoloGame.TabIndex = 4;
-            buttonSoloGame.Text = "Одиночная игра";
-            buttonSoloGame.UseVisualStyleBackColor = true;
-            buttonSoloGame.Click += buttonSoloGame_Click;
+            buttonTwoGame.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            buttonTwoGame.FlatStyle = FlatStyle.Flat;
+            buttonTwoGame.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold);
+            buttonTwoGame.ForeColor = Color.Blue;
+            buttonTwoGame.Location = new Point(3, 3);
+            buttonTwoGame.Name = "buttonTwoGame";
+            buttonTwoGame.Size = new Size(243, 89);
+            buttonTwoGame.TabIndex = 4;
+            buttonTwoGame.Text = "Игра вдвоем";
+            buttonTwoGame.UseVisualStyleBackColor = true;
+            buttonTwoGame.Click += buttonSoloGame_Click;
             // 
             // tableLayoutPanelLabelTheme
             // 
@@ -560,7 +560,7 @@
         private Button button2;
         private Button button1;
         private TableLayoutPanel tableLayoutPanelMenu;
-        private Button buttonSoloGame;
+        private Button buttonTwoGame;
         private TableLayoutPanel tableLayoutPanelContinueExit;
         private Button buttonContinue;
         private Label labelWLD;
