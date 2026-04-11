@@ -9,8 +9,8 @@ namespace ClassLibraryLogic
     public class Bots_mod
     {
 
-        public static int count_move = 0;
-        public static void reset_count_move() { count_move = 0; }
+        public static int countMove = 0;
+        public static void reset_count_move() { countMove = 0; }
         public static int easy_bot(bool is_tic)
         {
             Random random = new Random();
@@ -25,7 +25,7 @@ namespace ClassLibraryLogic
                 randomJ = random.Next(0, 3);
             }
             Field.put_x_o(randomI, randomJ, is_tic);
-            count_move++;
+            countMove++;
             return randomI * 3 + randomJ;
         }
         public static int medium_bot(bool is_tic)
@@ -45,7 +45,7 @@ namespace ClassLibraryLogic
             }   
             
             Field.put_x_o(randomI, randomJ, is_tic);
-            count_move++;
+            countMove++;
             return randomI * 3 + randomJ;
         }
         public static int impossible_bot(bool is_tic)
@@ -56,8 +56,8 @@ namespace ClassLibraryLogic
 
             Field field = new Field();
 
-            count_move++;
-            if (count_move == 1)
+            countMove++;
+            if (countMove == 1)
             {
                 //return 4;
 
@@ -84,7 +84,7 @@ namespace ClassLibraryLogic
                     choice = Field.check_pattern_minus();
                     if (choice != -1) return choice;
 
-                    if (count_move == 2)
+                    if (countMove == 2)
                     {
                         choice = Field.check_pattern_miniDiagonal();
                         if (choice != -1) return choice;
@@ -122,7 +122,7 @@ namespace ClassLibraryLogic
                     if (choice != -1) return choice;
 
                     
-                    if (count_move == 2)
+                    if (countMove == 2)
                     {
                         //проверка x_o
                         choice = Field.check_line();
@@ -138,7 +138,7 @@ namespace ClassLibraryLogic
                         choice = Field.check_pick_even();
                         if (choice != -1) return choice;
                     }
-                    else if (count_move == 3)
+                    else if (countMove == 3)
                     {
                         //проверка opposites
                         int opposites = Field.opposites();
@@ -190,7 +190,7 @@ namespace ClassLibraryLogic
 
                 }
                 
-                if (count_move >= 4)
+                if (countMove >= 4)
                 {
                     while (Field.check_x_o(randomI, randomJ) != -1)
                     {

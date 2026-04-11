@@ -14,20 +14,7 @@ namespace ClassLibraryLogic
         public static void put_x_o(int x, int y, bool is_tic) { field[x, y] = is_tic ? 1 : 0; }
         public static int check_x_o(int x, int y) { return field[x, y]; }
         public static void clear_field() { for (int i = 0; i < 3; i++) for (int j = 0; j < 3; j++) field[i, j] = -1; }
-        //public static int check_field()
-        //{
-        //    bool is_draw = true;
-        //    for (int i = 0; i < 3; i++)
-        //    {
-        //        if (field[i, 0] != -1 && field[i, 0] == field[i, 1] && field[i, 1] == field[i, 2]) return field[i, 0];
-        //        if (field[0, i] != -1 && field[0, i] == field[1, i] && field[1, i] == field[2, i]) return field[0, i];
-        //        for (int j = 0; j < 3; j++) if (field[i, j] == -1) is_draw = false;
-        //    }
-        //    if (field[0, 0] != -1 && field[0, 0] == field[1, 1] && field[1, 1] == field[2, 2]) return field[0, 0];
-        //    if (field[0, 2] != -1 && field[0, 2] == field[1, 1] && field[1, 1] == field[2, 0]) return field[0, 2];
 
-        //    return is_draw ? 2 : -1;
-        //}
 
 
         public int check_field(int[,] field)

@@ -5,13 +5,12 @@ namespace Tiс_tac_toe
 {
     public partial class TicTacToe : Form
     {
-        private static bool is_tic = true;
+        private static bool tic = true;
         private static Button[] buttons;
-        private static bool[] enable_buttons = new bool[9] { true, true, true, true, true, true, true, true, true };
-        private static bool is_end_game = false;
-        private static int game_mod;
-        private static bool bot_choice = false;
-        private static bool first_move_bot = false;
+        private static bool[] enableButtons = new bool[9] { true, true, true, true, true, true, true, true, true };
+        private static bool isEndGame = false;
+        private static int gameMod;
+        private static bool botChoice = false;
         private static int theme = 1;
 
         public TicTacToe()
@@ -54,7 +53,7 @@ namespace Tiс_tac_toe
         private void bot_click(object sender, EventArgs e, int num)
         {
             //бот делает выбор
-            bot_choice = true;
+            botChoice = true;
             switch (num)
             {
                 case 0: button1_Click(sender, e); break;
@@ -73,175 +72,175 @@ namespace Tiс_tac_toe
         private void button1_Click(object sender, EventArgs e)
         {
             //во время просмотра поля вернуться к окончанию игры
-            if (is_end_game) tableLayoutPanelEndGame.Visible = true;
+            if (isEndGame) tableLayoutPanelEndGame.Visible = true;
             //проверка на уже нажатую кнопку
-            if (!enable_buttons[0]) return;
+            if (!enableButtons[0]) return;
             //нажимаем кнопку
-            enable_buttons[0] = false;
+            enableButtons[0] = false;
             //вставляем X или O
-            button1.Text = is_tic ? "X" : "O";
+            button1.Text = tic ? "X" : "O";
             //меняем цвет в зависимости от хода
-            button1.ForeColor = is_tic ? Color.Red : Color.Blue;
+            button1.ForeColor = tic ? Color.Red : Color.Blue;
             //вставляем в массив ход
-            ClassLibraryLogic.Field.put_x_o(0, 0, is_tic);
+            ClassLibraryLogic.Field.put_x_o(0, 0, tic);
             //меняем ход
-            is_tic = !is_tic;
+            tic = !tic;
             //вывод чей сейчас ход
-            this.Text = is_tic ? "Ход крестиков" : "Ход ноликов";
+            this.Text = tic ? "Ход крестиков" : "Ход ноликов";
             //проверка на то чтобы бот не нажимал кнопку после окончании игры
             if (check_WLD()) return;
             //если режим не одиночный и бот делает выбор
-            if (game_mod != 0 && !bot_choice)
+            if (gameMod != 0 && !botChoice)
             {
                 //бот делает ход
-                bot_click(sender, e, bot_move(game_mod));
+                bot_click(sender, e, bot_move(gameMod));
                 //бот теперь не может сделать ход
-                bot_choice = false;
+                botChoice = false;
             }
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (is_end_game) tableLayoutPanelEndGame.Visible = true;
-            if (!enable_buttons[1]) return;
-            enable_buttons[1] = false;
-            button2.Text = is_tic ? "X" : "O";
-            button2.ForeColor = is_tic ? Color.Red : Color.Blue;
-            ClassLibraryLogic.Field.put_x_o(0, 1, is_tic);
-            is_tic = !is_tic;
-            this.Text = is_tic ? "Ход крестиков" : "Ход ноликов";
+            if (isEndGame) tableLayoutPanelEndGame.Visible = true;
+            if (!enableButtons[1]) return;
+            enableButtons[1] = false;
+            button2.Text = tic ? "X" : "O";
+            button2.ForeColor = tic ? Color.Red : Color.Blue;
+            ClassLibraryLogic.Field.put_x_o(0, 1, tic);
+            tic = !tic;
+            this.Text = tic ? "Ход крестиков" : "Ход ноликов";
             if (check_WLD()) return;
-            if (game_mod != 0 && !bot_choice)
+            if (gameMod != 0 && !botChoice)
             {
-                bot_click(sender, e, bot_move(game_mod));
-                bot_choice = false;
+                bot_click(sender, e, bot_move(gameMod));
+                botChoice = false;
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (is_end_game) tableLayoutPanelEndGame.Visible = true;
-            if (!enable_buttons[2]) return;
-            enable_buttons[2] = false;
-            button3.Text = is_tic ? "X" : "O";
-            button3.ForeColor = is_tic ? Color.Red : Color.Blue;
-            ClassLibraryLogic.Field.put_x_o(0, 2, is_tic);
-            is_tic = !is_tic;
-            this.Text = is_tic ? "Ход крестиков" : "Ход ноликов";
+            if (isEndGame) tableLayoutPanelEndGame.Visible = true;
+            if (!enableButtons[2]) return;
+            enableButtons[2] = false;
+            button3.Text = tic ? "X" : "O";
+            button3.ForeColor = tic ? Color.Red : Color.Blue;
+            ClassLibraryLogic.Field.put_x_o(0, 2, tic);
+            tic = !tic;
+            this.Text = tic ? "Ход крестиков" : "Ход ноликов";
             if (check_WLD()) return;
-            if (game_mod != 0 && !bot_choice)
+            if (gameMod != 0 && !botChoice)
             {
-                bot_click(sender, e, bot_move(game_mod));
-                bot_choice = false;
+                bot_click(sender, e, bot_move(gameMod));
+                botChoice = false;
             }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (is_end_game) tableLayoutPanelEndGame.Visible = true;
-            if (!enable_buttons[3]) return;
-            enable_buttons[3] = false;
-            button4.Text = is_tic ? "X" : "O";
-            button4.ForeColor = is_tic ? Color.Red : Color.Blue;
-            ClassLibraryLogic.Field.put_x_o(1, 0, is_tic);
-            is_tic = !is_tic;
-            this.Text = is_tic ? "Ход крестиков" : "Ход ноликов";
+            if (isEndGame) tableLayoutPanelEndGame.Visible = true;
+            if (!enableButtons[3]) return;
+            enableButtons[3] = false;
+            button4.Text = tic ? "X" : "O";
+            button4.ForeColor = tic ? Color.Red : Color.Blue;
+            ClassLibraryLogic.Field.put_x_o(1, 0, tic);
+            tic = !tic;
+            this.Text = tic ? "Ход крестиков" : "Ход ноликов";
             if (check_WLD()) return;
-            if (game_mod != 0 && !bot_choice)
+            if (gameMod != 0 && !botChoice)
             {
-                bot_click(sender, e, bot_move(game_mod));
-                bot_choice = false;
+                bot_click(sender, e, bot_move(gameMod));
+                botChoice = false;
             }
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (is_end_game) tableLayoutPanelEndGame.Visible = true;
-            if (!enable_buttons[4]) return;
-            enable_buttons[4] = false;
-            button5.Text = is_tic ? "X" : "O";
-            button5.ForeColor = is_tic ? Color.Red : Color.Blue;
-            ClassLibraryLogic.Field.put_x_o(1, 1, is_tic);
-            is_tic = !is_tic;
-            this.Text = is_tic ? "Ход крестиков" : "Ход ноликов";
+            if (isEndGame) tableLayoutPanelEndGame.Visible = true;
+            if (!enableButtons[4]) return;
+            enableButtons[4] = false;
+            button5.Text = tic ? "X" : "O";
+            button5.ForeColor = tic ? Color.Red : Color.Blue;
+            ClassLibraryLogic.Field.put_x_o(1, 1, tic);
+            tic = !tic;
+            this.Text = tic ? "Ход крестиков" : "Ход ноликов";
             if (check_WLD()) return;
-            if (game_mod != 0 && !bot_choice)
+            if (gameMod != 0 && !botChoice)
             {
-                bot_click(sender, e, bot_move(game_mod));
-                bot_choice = false;
+                bot_click(sender, e, bot_move(gameMod));
+                botChoice = false;
             }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            if (is_end_game) tableLayoutPanelEndGame.Visible = true;
-            if (!enable_buttons[5]) return;
-            enable_buttons[5] = false;
-            button6.Text = is_tic ? "X" : "O";
-            button6.ForeColor = is_tic ? Color.Red : Color.Blue;
-            ClassLibraryLogic.Field.put_x_o(1, 2, is_tic);
-            is_tic = !is_tic;
-            this.Text = is_tic ? "Ход крестиков" : "Ход ноликов";
+            if (isEndGame) tableLayoutPanelEndGame.Visible = true;
+            if (!enableButtons[5]) return;
+            enableButtons[5] = false;
+            button6.Text = tic ? "X" : "O";
+            button6.ForeColor = tic ? Color.Red : Color.Blue;
+            ClassLibraryLogic.Field.put_x_o(1, 2, tic);
+            tic = !tic;
+            this.Text = tic ? "Ход крестиков" : "Ход ноликов";
             if (check_WLD()) return;
-            if (game_mod != 0 && !bot_choice)
+            if (gameMod != 0 && !botChoice)
             {
-                bot_click(sender, e, bot_move(game_mod));
-                bot_choice = false;
+                bot_click(sender, e, bot_move(gameMod));
+                botChoice = false;
             }
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            if (is_end_game) tableLayoutPanelEndGame.Visible = true;
-            if (!enable_buttons[6]) return;
-            enable_buttons[6] = false;
-            button7.Text = is_tic ? "X" : "O";
-            button7.ForeColor = is_tic ? Color.Red : Color.Blue;
-            ClassLibraryLogic.Field.put_x_o(2, 0, is_tic);
-            is_tic = !is_tic;
-            this.Text = is_tic ? "Ход крестиков" : "Ход ноликов";
+            if (isEndGame) tableLayoutPanelEndGame.Visible = true;
+            if (!enableButtons[6]) return;
+            enableButtons[6] = false;
+            button7.Text = tic ? "X" : "O";
+            button7.ForeColor = tic ? Color.Red : Color.Blue;
+            ClassLibraryLogic.Field.put_x_o(2, 0, tic);
+            tic = !tic;
+            this.Text = tic ? "Ход крестиков" : "Ход ноликов";
             if (check_WLD()) return;
-            if (game_mod != 0 && !bot_choice)
+            if (gameMod != 0 && !botChoice)
             {
-                bot_click(sender, e, bot_move(game_mod));
-                bot_choice = false;
+                bot_click(sender, e, bot_move(gameMod));
+                botChoice = false;
             }
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            if (is_end_game) tableLayoutPanelEndGame.Visible = true;
-            if (!enable_buttons[7]) return;
-            enable_buttons[7] = false;
-            button8.Text = is_tic ? "X" : "O";
-            button8.ForeColor = is_tic ? Color.Red : Color.Blue;
-            ClassLibraryLogic.Field.put_x_o(2, 1, is_tic);
-            is_tic = !is_tic;
-            this.Text = is_tic ? "Ход крестиков" : "Ход ноликов";
+            if (isEndGame) tableLayoutPanelEndGame.Visible = true;
+            if (!enableButtons[7]) return;
+            enableButtons[7] = false;
+            button8.Text = tic ? "X" : "O";
+            button8.ForeColor = tic ? Color.Red : Color.Blue;
+            ClassLibraryLogic.Field.put_x_o(2, 1, tic);
+            tic = !tic;
+            this.Text = tic ? "Ход крестиков" : "Ход ноликов";
             if (check_WLD()) return;
-            if (game_mod != 0 && !bot_choice)
+            if (gameMod != 0 && !botChoice)
             {
-                bot_click(sender, e, bot_move(game_mod));
-                bot_choice = false;
+                bot_click(sender, e, bot_move(gameMod));
+                botChoice = false;
             }
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            if (is_end_game) tableLayoutPanelEndGame.Visible = true;
-            if (!enable_buttons[8]) return;
-            enable_buttons[8] = false;
-            button9.Text = is_tic ? "X" : "O";
-            button9.ForeColor = is_tic ? Color.Red : Color.Blue;
-            ClassLibraryLogic.Field.put_x_o(2, 2, is_tic);
-            is_tic = !is_tic;
-            this.Text = is_tic ? "Ход крестиков" : "Ход ноликов";
+            if (isEndGame) tableLayoutPanelEndGame.Visible = true;
+            if (!enableButtons[8]) return;
+            enableButtons[8] = false;
+            button9.Text = tic ? "X" : "O";
+            button9.ForeColor = tic ? Color.Red : Color.Blue;
+            ClassLibraryLogic.Field.put_x_o(2, 2, tic);
+            tic = !tic;
+            this.Text = tic ? "Ход крестиков" : "Ход ноликов";
             if (check_WLD()) return;
-            if (game_mod != 0 && !bot_choice)
+            if (gameMod != 0 && !botChoice)
             {
-                bot_click(sender, e, bot_move(game_mod));
-                bot_choice = false;
+                bot_click(sender, e, bot_move(gameMod));
+                botChoice = false;
             }
         }
         private void buttonContinue_Click(object sender, EventArgs e)
@@ -252,7 +251,7 @@ namespace Tiс_tac_toe
             //очищаем поле
             ClassLibraryLogic.Field.clear_field();
             //восстанавливаем ход крестиков
-            is_tic = true;
+            tic = true;
             //включаем кнопки с выбором режима игры
             buttonTwoGame.Enabled = true;
             buttonEasyBot.Enabled = true;
@@ -267,8 +266,8 @@ namespace Tiс_tac_toe
 
         private void buttonSoloGame_Click(object sender, EventArgs e)
         {
-            game_mod = 0;
-            is_end_game = false;
+            gameMod = 0;
+            isEndGame = false;
             //очищаем кнопки
             empty_text_buttons();
             //включаем кнопки
@@ -278,7 +277,7 @@ namespace Tiс_tac_toe
             this.Text = "Ход крестиков";
 
         }
-        public void enabled_buttons(bool enabled) { for (int i = 0; i < 9; ++i) enable_buttons[i] = enabled; }
+        public void enabled_buttons(bool enabled) { for (int i = 0; i < 9; ++i) enableButtons[i] = enabled; }
         public void empty_text_buttons() { foreach (Button button in buttons) button.Text = ""; }
         public bool check_WLD()
         {
@@ -292,24 +291,21 @@ namespace Tiс_tac_toe
                     case 0:
                         labelWLD.Text = "Нолики победили";
                         labelWLD.ForeColor = Color.Blue;
-                        //MessageBox.Show("Нолики победили");
                         break;
                     case 1:
                         labelWLD.Text = "Крестики победили";
                         labelWLD.ForeColor = Color.Red;
-                        //MessageBox.Show("Крестики победили");
                         break;
                     case 2:
                         labelWLD.Text = "Ничья";
-                        //MessageBox.Show("Ничья");
                         break;
                 }
                 enabled_buttons(false);
                 tableLayoutPanelEndGame.Visible = true;
                 this.Text = "Крестики нолики";
-                is_end_game = true;
+                isEndGame = true;
             }
-            return is_end_game;
+            return isEndGame;
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
@@ -335,9 +331,9 @@ namespace Tiс_tac_toe
             buttonMediumBot.Enabled = false;
             buttonImpossibleBot.Enabled = false;
             //игровой режим
-            game_mod = 1;
+            gameMod = 1;
             //меняем цвет кнопок
-            change_color(game_mod, sender, e);
+            change_color(gameMod, sender, e);
         }
         public static int bot_move(int mode)
         {
@@ -345,13 +341,13 @@ namespace Tiс_tac_toe
             switch (mode)
             {
                 case 1:
-                    choice = ClassLibraryLogic.Bots_mod.easy_bot(false);
+                    choice = Bots_mod.easy_bot(false);
                     return choice;
                 case 2:
-                    choice = ClassLibraryLogic.Bots_mod.medium_bot(is_tic);
+                    choice = Bots_mod.medium_bot(tic);
                     return choice;
                 case 3:
-                    choice = ClassLibraryLogic.Bots_mod.impossible_bot(is_tic);
+                    choice = Bots_mod.impossible_bot(tic);
                     return choice;
             }
             return -1;
@@ -370,9 +366,9 @@ namespace Tiс_tac_toe
             buttonMediumBot.Enabled = false;
             buttonImpossibleBot.Enabled = false;
             //игровой режим
-            game_mod = 2;
+            gameMod = 2;
             //меняем цвет кнопок
-            change_color(game_mod, sender, e);
+            change_color(gameMod, sender, e);
         }
 
 
@@ -389,16 +385,16 @@ namespace Tiс_tac_toe
             buttonMediumBot.Enabled = false;
             buttonImpossibleBot.Enabled = false;
             //игровой режим
-            game_mod = 3;
+            gameMod = 3;
             //меняем цвет кнопок
-            change_color(game_mod, sender, e);
+            change_color(gameMod, sender, e);
         }
 
         private void buttonX_Click(object sender, EventArgs e)
         {
             //скрываем панель
             tableLayoutPanelChoiseXO.Visible = false;
-            is_end_game = false;
+            isEndGame = false;
             //очищаем кнопки
             empty_text_buttons();
             //включаем кнопки
@@ -412,7 +408,7 @@ namespace Tiс_tac_toe
         {
             //скрываем панель
             tableLayoutPanelChoiseXO.Visible = false;
-            is_end_game = false;
+            isEndGame = false;
             //очищаем кнопки
             empty_text_buttons();
             //включаем кнопки
@@ -421,8 +417,8 @@ namespace Tiс_tac_toe
             tableLayoutPanelButtons.Visible = true;
             this.Text = "Ход крестиков";
             //ход бота
-            bot_click(sender, e, bot_move(game_mod));
-            bot_choice = false;
+            bot_click(sender, e, bot_move(gameMod));
+            botChoice = false;
         }
 
         private void buttonBlackTheme_Click(object sender, EventArgs e)
@@ -570,7 +566,7 @@ namespace Tiс_tac_toe
             Font font_buttons = new Font("Segoe UI", Math.Min(form_w / ((float)557 / 72), form_h / ((float)525 / 72)), FontStyle.Bold);
 
             Font font_theme_buttons = new Font("Segoe UI", Math.Min(form_w / ((float)557 / (float)11.25), form_h / ((float)525 / (float)11.25)), FontStyle.Bold);
-            Font font_game_mode = new Font("Segoe UI", Math.Min(form_w / ((float)557 / (float)20.25), form_h / ((float)525 / (float)20.25)), FontStyle.Bold);
+            Font font_gameMode = new Font("Segoe UI", Math.Min(form_w / ((float)557 / (float)20.25), form_h / ((float)525 / (float)20.25)), FontStyle.Bold);
             Font font_labels = new Font("Segoe UI", Math.Min(form_w / ((float)557 / (float)21.75), form_h / ((float)525 / (float)21.75)), FontStyle.Bold);
             Font font_three_buttons = new Font("Segoe UI", Math.Min(form_w / ((float)557 / (float)15.75), form_h / ((float)525 / (float)15.75)), FontStyle.Bold);
             //this.Text = Math.Min(form_w, form_h).ToString();
@@ -589,10 +585,10 @@ namespace Tiс_tac_toe
             buttonWhiteTheme.Font = font_theme_buttons;
             buttonBlackTheme.Font = font_theme_buttons;
 
-            buttonTwoGame.Font = font_game_mode;
-            buttonEasyBot.Font = font_game_mode;
-            buttonMediumBot.Font = font_game_mode;
-            buttonImpossibleBot.Font = font_game_mode;
+            buttonTwoGame.Font = font_gameMode;
+            buttonEasyBot.Font = font_gameMode;
+            buttonMediumBot.Font = font_gameMode;
+            buttonImpossibleBot.Font = font_gameMode;
 
             labelChoiceGameMode.Font = font_labels;
             labelXO.Font = font_labels;
