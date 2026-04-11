@@ -11,7 +11,7 @@ namespace ClassLibraryLogic
             {-1, -1, -1},
         };
 
-        public static void put_x_o(int x, int y, bool is_tic) { field[x, y] = is_tic ? 1 : 0; }
+        public static void put_x_o(int x, int y, bool tic) { field[x, y] = tic ? 1 : 0; }
         public static int check_x_o(int x, int y) { return field[x, y]; }
         public static void clear_field() { for (int i = 0; i < 3; i++) for (int j = 0; j < 3; j++) field[i, j] = -1; }
 

@@ -11,24 +11,22 @@ namespace ClassLibraryLogic
 
         public static int countMove = 0;
         public static void reset_count_move() { countMove = 0; }
-        public static int easy_bot(bool is_tic)
+        public static int easy_bot(bool tic)
         {
             Random random = new Random();
             int randomI = random.Next(0, 3);
             int randomJ = random.Next(0, 3);
-
-
 
             while (Field.check_x_o(randomI, randomJ) != -1)
             {
                 randomI = random.Next(0, 3);
                 randomJ = random.Next(0, 3);
             }
-            Field.put_x_o(randomI, randomJ, is_tic);
-            countMove++;
+            Field.put_x_o(randomI, randomJ, tic);
+            //countMove++;
             return randomI * 3 + randomJ;
         }
-        public static int medium_bot(bool is_tic)
+        public static int medium_bot(bool tic)
         {
             Random random = new Random();
             int randomI = random.Next(0, 3);
@@ -36,7 +34,7 @@ namespace ClassLibraryLogic
 
             Field field = new Field();
             
-            int choice = field.check_possible_win(is_tic, Field.field);
+            int choice = field.check_possible_win(tic, Field.field);
             if (choice != -1) return choice;
             while (Field.check_x_o(randomI, randomJ) != -1)
             {
@@ -44,11 +42,11 @@ namespace ClassLibraryLogic
                 randomJ = random.Next(0, 3);
             }   
             
-            Field.put_x_o(randomI, randomJ, is_tic);
+            Field.put_x_o(randomI, randomJ, tic);
             countMove++;
             return randomI * 3 + randomJ;
         }
-        public static int impossible_bot(bool is_tic)
+        public static int impossible_bot(bool tic)
         {
             Random random = new Random();
             int randomI = random.Next(0, 3);
@@ -62,7 +60,7 @@ namespace ClassLibraryLogic
                 //return 4;
 
                 //проверка для ноликов
-                if (Field.check_x_o(1, 1) == -1 && !is_tic)  return 4;
+                if (Field.check_x_o(1, 1) == -1 && !tic)  return 4;
                 //проверка на четную клектку                
                 while (Field.check_x_o(randomI, randomJ) != -1 || (randomI + randomJ) % 2 != 0)
                 {
@@ -74,10 +72,10 @@ namespace ClassLibraryLogic
             {
                 int choice;
                 //проверка за ноликов
-                if (!is_tic)
+                if (!tic)
                 {
                     //возможный выйгрышь или защита за ноликов
-                    choice = field.check_possible_win(!is_tic, Field.field);
+                    choice = field.check_possible_win(!tic, Field.field);
                     if (choice != -1) return choice;
 
                     //проверка на выйгрышь
@@ -89,7 +87,7 @@ namespace ClassLibraryLogic
                         choice = Field.check_pattern_miniDiagonal();
                         if (choice != -1) return choice;
 
-                        choice = Field.pattern_even_odd(is_tic);
+                        choice = Field.pattern_even_odd(tic);
                         if (choice != -1) return choice;
 
                         choice = field.check_pattern_diagonal_XOX(Field.field);
@@ -118,7 +116,7 @@ namespace ClassLibraryLogic
                 {
                     //проверка для крестиков
                     //возможный выйгрышь за крестиков
-                    choice = field.check_possible_win(is_tic, Field.field);
+                    choice = field.check_possible_win(tic, Field.field);
                     if (choice != -1) return choice;
 
                     
@@ -210,7 +208,7 @@ namespace ClassLibraryLogic
             }
             
 
-            Field.put_x_o(randomI, randomJ, is_tic);
+            Field.put_x_o(randomI, randomJ, tic);
             
             return randomI * 3 + randomJ;
         }

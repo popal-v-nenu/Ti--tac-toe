@@ -102,144 +102,240 @@ namespace Tiс_tac_toe
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //во время просмотра поля вернуться к окончанию игры
             if (isEndGame) tableLayoutPanelEndGame.Visible = true;
+            //проверка на уже нажатую кнопку
             if (!enableButtons[1]) return;
+            //нажимаем кнопку
             enableButtons[1] = false;
+            //вставляем X или O
             button2.Text = tic ? "X" : "O";
+            //меняем цвет в зависимости от хода
             button2.ForeColor = tic ? Color.Red : Color.Blue;
+            //вставляем в массив ход
             ClassLibraryLogic.Field.put_x_o(0, 1, tic);
+            //меняем ход
             tic = !tic;
+            //вывод чей сейчас ход
             this.Text = tic ? "Ход крестиков" : "Ход ноликов";
+            //проверка на то чтобы бот не нажимал кнопку после окончании игры
             if (check_WLD()) return;
+            //если режим не одиночный и бот делает выбор
             if (gameMod != 0 && !botChoice)
             {
+                //бот делает ход
                 bot_click(sender, e, bot_move(gameMod));
+                //бот теперь не может сделать ход
                 botChoice = false;
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //во время просмотра поля вернуться к окончанию игры
             if (isEndGame) tableLayoutPanelEndGame.Visible = true;
+            //проверка на уже нажатую кнопку
             if (!enableButtons[2]) return;
+            //нажимаем кнопку
             enableButtons[2] = false;
+            //вставляем X или O
             button3.Text = tic ? "X" : "O";
+            //меняем цвет в зависимости от хода
             button3.ForeColor = tic ? Color.Red : Color.Blue;
+            //вставляем в массив ход
             ClassLibraryLogic.Field.put_x_o(0, 2, tic);
+            //меняем ход
             tic = !tic;
+            //вывод чей сейчас ход
             this.Text = tic ? "Ход крестиков" : "Ход ноликов";
+            //проверка на то чтобы бот не нажимал кнопку после окончании игры
             if (check_WLD()) return;
+            //если режим не одиночный и бот делает выбор
             if (gameMod != 0 && !botChoice)
             {
+                //бот делает ход
                 bot_click(sender, e, bot_move(gameMod));
+                //бот теперь не может сделать ход
                 botChoice = false;
             }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //во время просмотра поля вернуться к окончанию игры
             if (isEndGame) tableLayoutPanelEndGame.Visible = true;
+            //проверка на уже нажатую кнопку
             if (!enableButtons[3]) return;
+            //нажимаем кнопку
             enableButtons[3] = false;
+            //вставляем X или O
             button4.Text = tic ? "X" : "O";
+            //меняем цвет в зависимости от хода
             button4.ForeColor = tic ? Color.Red : Color.Blue;
+            //вставляем в массив ход
             ClassLibraryLogic.Field.put_x_o(1, 0, tic);
+            //меняем ход
             tic = !tic;
+            //вывод чей сейчас ход
             this.Text = tic ? "Ход крестиков" : "Ход ноликов";
+            //проверка на то чтобы бот не нажимал кнопку после окончании игры
             if (check_WLD()) return;
+            //если режим не одиночный и бот делает выбор
             if (gameMod != 0 && !botChoice)
             {
+                //бот делает ход
                 bot_click(sender, e, bot_move(gameMod));
+                //бот теперь не может сделать ход
                 botChoice = false;
             }
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //во время просмотра поля вернуться к окончанию игры
             if (isEndGame) tableLayoutPanelEndGame.Visible = true;
+            //проверка на уже нажатую кнопку
             if (!enableButtons[4]) return;
+            //нажимаем кнопку
             enableButtons[4] = false;
+            //вставляем X или O
             button5.Text = tic ? "X" : "O";
+            //меняем цвет в зависимости от хода
             button5.ForeColor = tic ? Color.Red : Color.Blue;
+            //вставляем в массив ход
             ClassLibraryLogic.Field.put_x_o(1, 1, tic);
+            //меняем ход
             tic = !tic;
+            //вывод чей сейчас ход
             this.Text = tic ? "Ход крестиков" : "Ход ноликов";
+            //проверка на то чтобы бот не нажимал кнопку после окончании игры
             if (check_WLD()) return;
+            //если режим не одиночный и бот делает выбор
             if (gameMod != 0 && !botChoice)
             {
+                //бот делает ход
                 bot_click(sender, e, bot_move(gameMod));
+                //бот теперь не может сделать ход
                 botChoice = false;
             }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //во время просмотра поля вернуться к окончанию игры
             if (isEndGame) tableLayoutPanelEndGame.Visible = true;
+            //проверка на уже нажатую кнопку
             if (!enableButtons[5]) return;
+            //нажимаем кнопку
             enableButtons[5] = false;
+            //вставляем X или O
             button6.Text = tic ? "X" : "O";
+            //меняем цвет в зависимости от хода
             button6.ForeColor = tic ? Color.Red : Color.Blue;
+            //вставляем в массив ход
             ClassLibraryLogic.Field.put_x_o(1, 2, tic);
+            //меняем ход
             tic = !tic;
+            //вывод чей сейчас ход
             this.Text = tic ? "Ход крестиков" : "Ход ноликов";
+            //проверка на то чтобы бот не нажимал кнопку после окончании игры
             if (check_WLD()) return;
+            //если режим не одиночный и бот делает выбор
             if (gameMod != 0 && !botChoice)
             {
+                //бот делает ход
                 bot_click(sender, e, bot_move(gameMod));
+                //бот теперь не может сделать ход
                 botChoice = false;
             }
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //во время просмотра поля вернуться к окончанию игры
             if (isEndGame) tableLayoutPanelEndGame.Visible = true;
+            //проверка на уже нажатую кнопку
             if (!enableButtons[6]) return;
+            //нажимаем кнопку
             enableButtons[6] = false;
+            //вставляем X или O
             button7.Text = tic ? "X" : "O";
+            //меняем цвет в зависимости от хода
             button7.ForeColor = tic ? Color.Red : Color.Blue;
+            //вставляем в массив ход
             ClassLibraryLogic.Field.put_x_o(2, 0, tic);
+            //меняем ход
             tic = !tic;
+            //вывод чей сейчас ход
             this.Text = tic ? "Ход крестиков" : "Ход ноликов";
+            //проверка на то чтобы бот не нажимал кнопку после окончании игры
             if (check_WLD()) return;
+            //если режим не одиночный и бот делает выбор
             if (gameMod != 0 && !botChoice)
             {
+                //бот делает ход
                 bot_click(sender, e, bot_move(gameMod));
+                //бот теперь не может сделать ход
                 botChoice = false;
             }
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
+            //во время просмотра поля вернуться к окончанию игры
             if (isEndGame) tableLayoutPanelEndGame.Visible = true;
+            //проверка на уже нажатую кнопку
             if (!enableButtons[7]) return;
+            //нажимаем кнопку
             enableButtons[7] = false;
+            //вставляем X или O
             button8.Text = tic ? "X" : "O";
+            //меняем цвет в зависимости от хода
             button8.ForeColor = tic ? Color.Red : Color.Blue;
+            //вставляем в массив ход
             ClassLibraryLogic.Field.put_x_o(2, 1, tic);
+            //меняем ход
             tic = !tic;
+            //вывод чей сейчас ход
             this.Text = tic ? "Ход крестиков" : "Ход ноликов";
+            //проверка на то чтобы бот не нажимал кнопку после окончании игры
             if (check_WLD()) return;
+            //если режим не одиночный и бот делает выбор
             if (gameMod != 0 && !botChoice)
             {
+                //бот делает ход
                 bot_click(sender, e, bot_move(gameMod));
+                //бот теперь не может сделать ход
                 botChoice = false;
             }
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //во время просмотра поля вернуться к окончанию игры
             if (isEndGame) tableLayoutPanelEndGame.Visible = true;
+            //проверка на уже нажатую кнопку
             if (!enableButtons[8]) return;
+            //нажимаем кнопку
             enableButtons[8] = false;
+            //вставляем X или O
             button9.Text = tic ? "X" : "O";
+            //меняем цвет в зависимости от хода
             button9.ForeColor = tic ? Color.Red : Color.Blue;
+            //вставляем в массив ход
             ClassLibraryLogic.Field.put_x_o(2, 2, tic);
+            //меняем ход
             tic = !tic;
+            //вывод чей сейчас ход
             this.Text = tic ? "Ход крестиков" : "Ход ноликов";
+            //проверка на то чтобы бот не нажимал кнопку после окончании игры
             if (check_WLD()) return;
+            //если режим не одиночный и бот делает выбор
             if (gameMod != 0 && !botChoice)
             {
+                //бот делает ход
                 bot_click(sender, e, bot_move(gameMod));
+                //бот теперь не может сделать ход
                 botChoice = false;
             }
         }
@@ -341,7 +437,7 @@ namespace Tiс_tac_toe
             switch (mode)
             {
                 case 1:
-                    choice = Bots_mod.easy_bot(false);
+                    choice = Bots_mod.easy_bot(true);
                     return choice;
                 case 2:
                     choice = Bots_mod.medium_bot(tic);
